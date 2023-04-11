@@ -30,13 +30,13 @@ def load_model(model_name, device, num_gpus, load_8bit=False, debug=False):
     else:
         raise ValueError(f"Invalid device: {device}")
 
-    if "chatglm" in model_name:
-        tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
-        model = AutoModel.from_pretrained(model_name, trust_remote_code=True).half().cuda()
-    else:
-        tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)
-        model = AutoModelForCausalLM.from_pretrained(model_name,
-            low_cpu_mem_usage=True, **kwargs)
+    # if "chatglm" in model_name:
+    tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+    model = AutoModel.from_pretrained(model_name, trust_remote_code=True).half().cuda()
+    # else:
+    #     tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)
+    #     model = AutoModelForCausalLM.from_pretrained(model_name,
+    #         low_cpu_mem_usage=True, **kwargs)
 
     if load_8bit:
         compress_module(model, device)
