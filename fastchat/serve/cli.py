@@ -108,4 +108,5 @@ if __name__ == "__main__":
                         choices=["simple", "rich"], help="Display style.")
     parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()
+    print('Hello user!')
     main(args)
